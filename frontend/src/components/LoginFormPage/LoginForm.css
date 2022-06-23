@@ -1,0 +1,10 @@
+form {
+    display: flex;
+  }
+
+button {
+    background-color: #8fe4a3;
+    border: black;
+    color: white;
+    cursor: pointer;
+  }
