@@ -37,6 +37,7 @@ router.post(
         return next(err);
       }
 
+
       await setTokenCookie(res, user);
 
       return res.json({
@@ -44,7 +45,7 @@ router.post(
       });
     })
   );
-  
+
   router.get(
     '/',
     restoreUser,
