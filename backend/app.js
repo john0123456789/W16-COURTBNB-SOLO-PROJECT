@@ -37,6 +37,7 @@ if (!isProduction) {
   );
 
   // Set the _csrf token and create req.csrfToken method
+  // when testing in postman comment out
   app.use(
     csurf({
       cookie: {
