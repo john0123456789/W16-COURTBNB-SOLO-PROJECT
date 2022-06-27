@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Court.associate = function(models) {
     Court.hasMany(models.Review, { foreignKey: 'courtId' })
+    Court.belongsTo(models.User, { foreignKey: 'userId' })
+    Court.hasOne(models.Image, { foreignKey: 'courtId' })
   };
   return Court;
 };
