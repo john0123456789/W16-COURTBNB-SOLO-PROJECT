@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { thunkCreateCourt } from '../../store/courts';
-import { useHistory } from 'react-router-dom'
+import { thunkUpdateCourt } from '../../store/courts';
+import { useHistory, useParams } from 'react-router-dom'
 
-function CreateCourtPage() {
+function UpdateCourtPage() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { id } = useParams();
   const user = useSelector(state => state.session.user)
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [country, setCountry] = useState('');
-  const [price, setPrice] = useState('');
+  const court = useSelector(state => state.courts)
+  const oneCourt = court[id]
+  const [name, setName] = useState(oneCourt.name);
+  const [description, setDescription] = useState(oneCourt.description);
+  const [address, setAddress] = useState(oneCourt.address);
+  const [city, setCity] = useState(oneCourt.city);
+  const [state, setState] = useState(oneCourt.state);
+  const [country, setCountry] = useState(oneCourt.country);
+  const [price, setPrice] = useState(oneCourt.price);
   const [userId] = useState(user.id);
   const [errors, setErrors] = useState([]);
 
@@ -26,8 +29,12 @@ function CreateCourtPage() {
   const updateDescription = (e) => setDescription(e.target.value);
   const updatePrice = (e) => setPrice(e.target.value);
 
+
   const handleSubmit = async (e) => {
-    const court = {
+    e.preventDefault();
+
+    const editedCourt = {
+      id,
       userId,
       description,
       address,
@@ -38,7 +45,7 @@ function CreateCourtPage() {
       price,
     };
     e.preventDefault();
-    dispatch(thunkCreateCourt(court));
+    dispatch(thunkUpdateCourt(editedCourt, id));
     history.push('/courts')
   };
 
@@ -49,7 +56,7 @@ function CreateCourtPage() {
 
   return (
     <>
-      <h1>Add Court</h1>
+      <h1>Edit Court</h1>
       <form className='court-form' onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, id) => (
@@ -133,4 +140,4 @@ function CreateCourtPage() {
   );
 }
 
-export default CreateCourtPage;
+export default UpdateCourtPage;

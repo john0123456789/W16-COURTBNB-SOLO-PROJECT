@@ -36,3 +36,12 @@ router.post('/create', asyncHandler(async(req,res) => {
     return res.json(addCourt)
 }));
 module.exports = router;
+
+// editing a court
+router.put('/:id(\\d+)', asyncHandler(async function (req, res) {
+    const court = await db.Court.findByPk(req.body.id);
+    const {userId, description, address, city, state, country, name, price} = req.body
+      const editedCourt = await court.update(req.body)
+      return res.json(editedCourt)
+  })
+);
