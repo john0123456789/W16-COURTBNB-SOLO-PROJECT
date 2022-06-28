@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -34,8 +34,12 @@ function ProfileButton({ user }) {
       <button onClick={openMenu}>
         <i class="fa-regular fa-user"></i>
       </button>
-      <NavLink to="/courts">Courts</NavLink>
-      <NavLink to="/create">Add Court</NavLink>
+      <button>
+        <NavLink to="/courts">Courts</NavLink>
+      </button>
+      <button>
+        <NavLink to="/create">Add Court</NavLink>
+      </button>
       {showMenu && (
         <ul className="profile-dropdown">
           <li>{user.username}</li>

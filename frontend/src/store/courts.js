@@ -64,6 +64,23 @@ export const thunkGetCourts = () => async (dispatch) => {
     }
 }
 
+export const thunkUpdateCourt = (editedCourt, id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/courts/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(editedCourt),
+    });
+    if (response.ok) {
+      const court = await response.json();
+      dispatch(editedCourt(court));
+      return court;
+    }
+  }
+
+
+
 const initialState = {};
 
 export const courtReducer = (state = initialState, action) => {
@@ -79,6 +96,10 @@ export const courtReducer = (state = initialState, action) => {
             newState = {...state, [action.court.id]: action.court }
         };
         return newState
+      case UPDATE_COURT:
+        if (!state[action.court.id]) {
+          newState = {...state, [action.court.id]: action.court }
+        };
       default:
         return state;
     }
