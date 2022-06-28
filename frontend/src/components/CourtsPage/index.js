@@ -17,6 +17,8 @@ function CourtsPage() {
         {courtsObj && courtsArr.map(court => {
             return <ul key={court.id}>
                 <li>{court.name}</li>
+                <li>{court.description}</li>
+                <li>${court.price}.00/hour</li>
             </ul>
           })}
         </>

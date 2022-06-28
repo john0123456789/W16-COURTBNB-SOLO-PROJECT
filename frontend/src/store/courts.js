@@ -40,6 +40,21 @@ const actionDeleteCourt = (court) => {
 }
 
 // action creators/thunks
+export const thunkCreateCourt = (court) => async dispatch => {
+
+    const response = await csrfFetch(`/api/courts/create`, {
+      method: 'POST',
+      headers: { 'Content-Type' : 'application/json' },
+      body: JSON.stringify(court)
+    });
+
+    if (response.ok) {
+      const newCourt = await response.json()
+      dispatch(actionCreateCourt(newCourt))
+      return newCourt;
+    }
+  };
+
 export const thunkGetCourts = () => async (dispatch) => {
     const response = await csrfFetch('/api/courts');
 
@@ -56,14 +71,14 @@ export const courtReducer = (state = initialState, action) => {
     switch(action.type) {
       case GET_COURTS:
         action.courts.forEach((court) => {
-            return newState[court.id] = court;
+        return newState[court.id] = court;
         });
         return newState;
-//       case CREATE_COURT:
-//         if (!state[action.createdCourt.id]) {
-//             newState = {...state, [action.createdCourt.id]: action.createdCourt }
-//         };
-//         return newState
+      case CREATE_COURT:
+        if (!state[action.court.id]) {
+            newState = {...state, [action.court.id]: action.court }
+        };
+        return newState
       default:
         return state;
     }

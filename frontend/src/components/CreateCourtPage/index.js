@@ -1,49 +1,57 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { createCourt } from '../../store/courts';
+import { thunkCreateCourt } from '../../store/courts';
+import { Redirect } from 'react-router-dom'
 
 function CreateCourtPage() {
   const dispatch = useDispatch();
-  const sessionUser = useSelector((state) => state.session.user);
+  const user = useSelector(state => state.session.user)
   const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [country, setCountry] = useState('');
-  // const [description, setDescription] = useState('');
+  const [price, setPrice] = useState('');
+  const [userId] = useState(user.id);
   const [errors, setErrors] = useState([]);
 
-  if (!sessionUser) return <Redirect to="/" />;
+
+  const updateAddress = (e) => setAddress(e.target.value);
+  const updateCity = (e) => setCity(e.target.value);
+  const updateState = (e) => setState(e.target.value);
+  const updateCountry = (e) => setCountry(e.target.value);
+  const updateName = (e) => setName(e.target.value);
+  const updateDescription = (e) => setDescription(e.target.value);
+  const updatePrice = (e) => setPrice(e.target.value);
+
+
+  useEffect(() => {
+    dispatch(thunkCreateCourt());
+  }, [dispatch])
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    // TODO - Validation Errors
-    setErrors([]);
     const court = {
-      userId: sessionUser.id,
-      name,
+      description,
       address,
       city,
       state,
       country,
-      // description,
+      name,
+      price,
     };
-
-    setName('');
-    setAddress('');
-    setCity('');
-    setState('');
-    setCountry('');
-    // setDescription('');
-
-    return dispatch(createCourt(court));
+    e.preventDefault();
+    dispatch(thunkCreateCourt(court));
   };
+
+  const handleCancelClick = (e) => {
+    e.preventDefault();
+  }
 
   return (
     <>
       <h1>Court Form</h1>
-      <form onSubmit={handleSubmit}>
+      <form className='court-form' onSubmit={handleSubmit}>
         <ul>
           {errors.map((error, id) => (
             <li key={id}>{error}</li>
@@ -54,7 +62,7 @@ function CreateCourtPage() {
           <input
             type="text"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={updateName}
             required
           />
         </label>
@@ -63,7 +71,7 @@ function CreateCourtPage() {
           <input
             type="text"
             value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            onChange={updateAddress}
             required
           />
         </label>
@@ -72,7 +80,7 @@ function CreateCourtPage() {
           <input
             type="text"
             value={city}
-            onChange={(e) => setCity(e.target.value)}
+            onChange={updateCity}
             required
           />
         </label>
@@ -81,7 +89,7 @@ function CreateCourtPage() {
           <input
             type="text"
             value={state}
-            onChange={(e) => setState(e.target.value)}
+            onChange={updateState}
             required
           />
         </label>
@@ -90,20 +98,30 @@ function CreateCourtPage() {
           <input
             type="text"
             value={country}
-            onChange={(e) => setCountry(e.target.value)}
+            onChange={updateCountry}
             required
           />
         </label>
-        {/* <label>
+        <label>
           Description
           <textarea
             type="text"
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={updateDescription}
             required
           />
-        </label> */}
+        </label>
+        <label>
+          Price
+          <textarea
+            type="text"
+            value={price}
+            onChange={updatePrice}
+            required
+          />
+        </label>
         <button type="submit">Submit</button>
+        <button type="button">Cancel</button>
       </form>
     </>
   );
