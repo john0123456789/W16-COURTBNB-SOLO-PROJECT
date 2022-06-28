@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+  const history = useHistory();
 
   const openMenu = () => {
     if (showMenu) return;
@@ -29,17 +30,23 @@ function ProfileButton({ user }) {
     dispatch(sessionActions.logout());
   };
 
+  const handleCourtsClick = (e) => {
+    e.preventDefault();
+    history.push('/courts')
+  }
+
+  const handleAddClick = (e) => {
+    e.preventDefault();
+    history.push('/create')
+  }
+
   return (
     <>
       <button onClick={openMenu}>
         <i class="fa-regular fa-user"></i>
       </button>
-      <button>
-        <NavLink to="/courts">Courts</NavLink>
-      </button>
-      <button>
-        <NavLink to="/create">Add Court</NavLink>
-      </button>
+      <button type= 'button' onClick={handleCourtsClick}>Courts</button>
+      <button type='button' onClick={handleAddClick}>Add Court</button>
       {showMenu && (
         <ul className="profile-dropdown">
           <li>{user.username}</li>
