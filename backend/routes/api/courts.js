@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../../db/models')
 const asyncHandler = require('express-async-handler');
+const { response } = require('express');
 // const { requireAuth } = require('../auth.js')
 // const { check, validationResult } = require('express-validator');
 
@@ -35,13 +36,24 @@ router.post('/create', asyncHandler(async(req,res) => {
     });
     return res.json(addCourt)
 }));
-module.exports = router;
 
 // editing a court
 router.put('/:id(\\d+)', asyncHandler(async function (req, res) {
     const court = await db.Court.findByPk(req.body.id);
     const {userId, description, address, city, state, country, name, price} = req.body
-      const editedCourt = await court.update(req.body)
-      return res.json(editedCourt)
-  })
+    const editedCourt = await court.update(req.body)
+    return res.json(editedCourt)
+})
 );
+
+// deleting a court
+router.delete('/:id(\\d+)', asyncHandler(async(req, res) => {
+    const court = await db.Court.findByPk(req.params.id);
+    await court.destroy();
+    return res.json({ id: court.id })
+}));
+
+
+
+
+module.exports = router;

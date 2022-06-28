@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { thunkUpdateCourt } from '../../store/courts';
+import { thunkUpdateCourt, thunkDeleteCourt } from '../../store/courts';
 import { useHistory, useParams } from 'react-router-dom'
 
 function UpdateCourtPage() {
@@ -48,6 +48,12 @@ function UpdateCourtPage() {
     dispatch(thunkUpdateCourt(editedCourt, id));
     history.push('/courts')
   };
+
+  const handleDeleteClick = (e) => {
+    e.preventDefault();
+    dispatch(thunkDeleteCourt(court, id))
+    history.push('/courts')
+  }
 
   const handleCancelClick = (e) => {
     e.preventDefault();
@@ -135,6 +141,7 @@ function UpdateCourtPage() {
         </label>
         <button type="submit">Submit</button>
         <button type="button" onClick={handleCancelClick}>Cancel</button>
+        <button type="button" onClick={handleDeleteClick}>Delete</button>
       </form>
     </>
   );
