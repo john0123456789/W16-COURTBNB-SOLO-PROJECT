@@ -21,8 +21,13 @@ router.get('/', asyncHandler(async (req, res, next) => {
 }));
 
 // creating a court
-// router.post('/', asyncHandler(async (req, res, next) => {
-//     const { userId, description, address, city, state, country, name, price, } = req.body
-// }
+router.post('/create', asyncHandler(async (req, res, next) => {
+    const { userId, description, address, city, state, country, name, price, } = req.body
+
+    const createCourt = await db.Court.create(req.body);
+    const court = await db.Court.findByPK(court.id, {
+    })
+    return res.json(court)
+}))
 
 module.exports = router;
