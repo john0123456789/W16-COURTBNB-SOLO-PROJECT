@@ -12,6 +12,7 @@ function CourtsPage() {
         dispatch(thunkGetCourts())
     }, [dispatch])
 
+
     return (
         <>
         {courtsObj && courtsArr.map(court => {
