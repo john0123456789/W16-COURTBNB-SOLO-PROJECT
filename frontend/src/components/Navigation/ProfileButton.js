@@ -43,7 +43,7 @@ function ProfileButton({ user }) {
   return (
     <>
       <button onClick={openMenu}>
-        <i class="fa-regular fa-user"></i>
+        <i className="fa-regular fa-user"></i>
       </button>
       <button type= 'button' onClick={handleCourtsClick}>Courts</button>
       <button type='button' onClick={handleAddClick}>Add Court</button>

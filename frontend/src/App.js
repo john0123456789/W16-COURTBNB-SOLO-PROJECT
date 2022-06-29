@@ -5,7 +5,10 @@ import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import CourtsPage from "./components/CourtsPage";
 import CreateCourtPage from "./components/CreateCourtPage";
-import UpdateCourtPage from "./components/UpdateCourtPage"
+import UpdateCourtPage from "./components/UpdateCourtPage";
+import ReviewsPage from "./components/ReviewsPage";
+import CreateReviewPage from "./components/CreateReviewPage";
+// import SingleCourtPage from "./components/SingleCourtPage"
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 
@@ -27,8 +30,17 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+          {/* <Route path="/courts/:id">
+            <SingleCourtPage />
+          </Route> */}
           <Route path="/courts">
             <CourtsPage />
+          </Route>
+          <Route exact path="/reviews/create">
+            <CreateReviewPage />
+          </Route>
+          <Route path="/reviews">
+            <ReviewsPage />
           </Route>
           <Route path="/create">
             <CreateCourtPage />

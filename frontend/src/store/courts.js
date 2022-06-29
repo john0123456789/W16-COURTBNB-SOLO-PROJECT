@@ -4,6 +4,7 @@ import { csrfFetch } from "./csrf"
 const CREATE_COURT = 'courts/CREATE_COURT'
 // READ
 const GET_COURTS = 'courts/GET_COURTS'
+const GET_SINGLE_COURT = 'courts/GET_SINGLE_COURT'
 // UPDATE
 const UPDATE_COURT = 'courts/UPDATE_COURT'
 // DELETE
@@ -25,6 +26,13 @@ const actionGetCourts = (courts) => {
     }
 }
 
+const actionSingleCourt = (court) => {
+  return {
+    type: GET_SINGLE_COURT,
+    court
+  }
+}
+
 const actionUpdateCourt = (court) => {
     return {
         type: UPDATE_COURT,
@@ -40,6 +48,7 @@ const actionDeleteCourt = (court) => {
 }
 
 // action creators/thunks
+// create new court
 export const thunkCreateCourt = (court) => async dispatch => {
 
     const response = await csrfFetch(`/api/courts/create`, {
@@ -55,6 +64,7 @@ export const thunkCreateCourt = (court) => async dispatch => {
     }
   };
 
+// get all courts
 export const thunkGetCourts = () => async (dispatch) => {
     const response = await csrfFetch('/api/courts');
 
@@ -64,6 +74,17 @@ export const thunkGetCourts = () => async (dispatch) => {
     }
 }
 
+// get a court
+export const thunkSingleCourt = (id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/courts/${id}`)
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(actionSingleCourt(data))
+  }
+}
+
+// update a court
 export const thunkUpdateCourt = (court, id) => async (dispatch) => {
   const response = await csrfFetch(`/api/courts/${id}`, {
       method: "PUT",
@@ -79,6 +100,7 @@ export const thunkUpdateCourt = (court, id) => async (dispatch) => {
     }
   }
 
+// delete a court
 export const thunkDeleteCourt = (court, id) => async (dispatch) => {
   const response = await csrfFetch(`/api/courts/${id}`, {
     method: 'DELETE'
@@ -101,6 +123,8 @@ export const courtReducer = (state = initialState, action) => {
         return newState[court.id] = court;
         });
         return newState;
+      case GET_SINGLE_COURT:
+        return {...state, types: action.types};
       case CREATE_COURT:
         if (!state[action.court.id]) {
             newState = {...state, [action.court.id]: action.court }

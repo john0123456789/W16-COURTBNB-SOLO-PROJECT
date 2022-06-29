@@ -15,48 +15,43 @@ const { response } = require('express');
 //         .withMessage('Please select a rating.'),
 // ];
 
-// getting all courts
+// getting all reviews
 router.get('/', asyncHandler(async (req, res, next) => {
-    const courts = await db.Court.findAll();
-    return res.json(courts);
+    const reviews = await db.Review.findAll();
+    return res.json(reviews);
 }));
 
-// getting a court
+// getting a review
 // router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
-//     const court = await db.Court.findByPk(req.params.id);
-//     return res.json(court)
+//     const review = await db.Review.findByPk(req.params.id);
+//     return res.json(review)
 // }));
 
-// creating a court
+// creating a review
 router.post('/create', asyncHandler(async (req,res) => {
-    const {userId, description, address, city, state, country, name, price} = req.body
-    const addCourt = await db.Court.create({
-        userId,
-        description,
-        address,
-        city,
-        state,
-        country,
-        name,
-        price,
+    const {courtId, review, rating} = req.body
+    const addReview = await db.Review.create({
+       courtId,
+       review,
+       rating,
     });
-    return res.json(addCourt)
+    return res.json(addReview)
 }));
 
-// editing a court
+// editing a review
 router.put('/:id(\\d+)', asyncHandler(async function (req, res) {
-    const court = await db.Court.findByPk(req.body.id);
-    const {userId, description, address, city, state, country, name, price} = req.body
-    const editedCourt = await court.update(req.body)
-    return res.json(editedCourt)
+    const editReview = await db.Review.findByPk(req.body.id);
+    const {courtId, review, rating} = req.body
+    const editedReview = await editReview.update(req.body)
+    return res.json(editedReview)
 })
 );
 
-// deleting a court
+// deleting a review
 router.delete('/:id(\\d+)', asyncHandler(async(req, res) => {
-    const court = await db.Court.findByPk(req.params.id);
-    await court.destroy();
-    return res.json({ id: court.id })
+    const review = await db.Review.findByPk(req.params.id);
+    await review.destroy();
+    return res.json({ id: review.id })
 }));
 
 
