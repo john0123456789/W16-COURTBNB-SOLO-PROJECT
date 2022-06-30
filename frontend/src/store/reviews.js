@@ -6,7 +6,7 @@ const CREATE_REVIEW = 'reviews/CREATE_REVIEW'
 const GET_REVIEWS = 'reviews/GET_REVIEWS'
 // const GET_SINGLE_REVIEW = 'courts/GET_SINGLE_REVIEW'
 // UPDATE
-const UPDATE_REVIEW = 'reviews/UPDATE_REVIEW'
+// const UPDATE_REVIEW = 'reviews/UPDATE_REVIEW'
 // DELETE
 const DELETE_REVIEW = 'reviews/DELETE_REVIEW'
 
@@ -64,8 +64,8 @@ export const thunkCreateReview = (review) => async dispatch => {
   };
 
 // get all reviews
-export const thunkGetReviews = () => async (dispatch) => {
-    const response = await csrfFetch('/api/reviews');
+export const thunkGetReviews = (id) => async (dispatch) => {
+    const response = await csrfFetch(`/api/reviews/court/${id}`);
 
     if (response.ok) {
       const data = await response.json();
@@ -122,9 +122,9 @@ export const reviewReducer = (state = initialState, action) => {
         return newState;
       case CREATE_REVIEW:
          return {...state, [action.review.id]: action.review };
-      case UPDATE_REVIEW:
-          newState = {...state, [action.review.id]: action.review };
-          return newState;
+      // case UPDATE_REVIEW:
+      //     newState = {...state, [action.review.id]: action.review };
+      //     return newState;
       case DELETE_REVIEW:
         delete newState[action.review.id];
         return newState;

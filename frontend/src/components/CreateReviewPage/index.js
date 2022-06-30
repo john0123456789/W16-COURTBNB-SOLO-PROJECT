@@ -7,11 +7,16 @@ function CreateReviewPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector(state => state.session.user);
+  const [userId] = useState(user.id);
+
   const court = useSelector(state => state.courts);
+  console.log(court)
+  const courtArr = Object.values(court);
+  console.log(courtArr)
+  const courtId = null;
+
   const [review, setReview] = useState('');
   const [rating, setRating] = useState(1);
-  const courtId = 3;
-  const [userId] = useState(user.id)
   const [errors, setErrors] = useState([]);
 
   const updateReview = (e) => setReview(e.target.value);
@@ -27,7 +32,7 @@ function CreateReviewPage() {
     };
     e.preventDefault();
     dispatch(thunkCreateReview(reviewForm));
-    history.push('/reviews')
+    history.push('/courts')
   };
 
   const handleCancelClick = (e) => {

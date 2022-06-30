@@ -25,20 +25,22 @@ function CourtsPage() {
               }
               const handleReviewClick = (e) => {
                 e.preventDefault();
-                history.push(`/reviews`)
+                const courtId = Number(e.target.id)
+                history.push(`/reviews/court/${courtId}`)
               }
               const handleAddReviewClick = (e) => {
                 e.preventDefault();
                 history.push(`/reviews/create`)
               }
+              
             return <ul key={court.id}>
                 <li>{court.name}</li>
-                <li>{court.description}</li>
-                <li>{court.country}</li>
-                <li>${court.price}.00/hour</li>
+                <li>Description: {court.description}</li>
+                <li>Country: {court.country}</li>
+                <li>Rate: ${court.price}.00/hour</li>
                 <button type='button' onClick={handleEditClick}>Edit</button>
-                <button type='button' onClick={handleReviewClick}>Reviews</button>
-                <button type='button' onClick={handleAddReviewClick}>Add Review</button>
+                <button type='button' id={court.id} onClick={handleReviewClick}>Reviews</button>
+                <button type='button' id={court.id} onClick={handleAddReviewClick}>Add Review</button>
             </ul>
           })}
         </>
@@ -49,9 +51,9 @@ function CourtsPage() {
         {courtsObj && courtsArr.map(court => {
             return <ul key={court.id}>
                 <li>{court.name}</li>
-                <li>{court.description}</li>
-                <li>{court.country}</li>
-                <li>${court.price}.00/hour</li>
+                <li>Description: {court.description}</li>
+                <li>Country: {court.country}</li>
+                <li>Rate: ${court.price}.00/hour</li>
             </ul>
           })}
         </>
