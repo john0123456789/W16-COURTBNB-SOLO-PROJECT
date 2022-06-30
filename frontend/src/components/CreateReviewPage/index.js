@@ -6,23 +6,27 @@ import { useHistory } from 'react-router-dom'
 function CreateReviewPage() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const court = useSelector(state => state.reviews)
+  const user = useSelector(state => state.session.user);
+  const court = useSelector(state => state.courts);
   const [review, setReview] = useState('');
-  const [rating, setRating] = useState('');
-  const [courtId] = useState(court.id);
+  const [rating, setRating] = useState(1);
+  const courtId = 3;
+  const [userId] = useState(user.id)
   const [errors, setErrors] = useState([]);
 
   const updateReview = (e) => setReview(e.target.value);
-  const updateRating = (e) => setRating(e.target.value);
+  const updateRating = (e) => setRating(parseInt(e.target.value, 10));
 
-  const handleSubmit = async (e) => {
-    const review = {
+
+  const handleAddReview = async (e) => {
+    const reviewForm = {
+      userId,
       courtId,
       review,
       rating,
     };
     e.preventDefault();
-    dispatch(thunkCreateReview(review));
+    dispatch(thunkCreateReview(reviewForm));
     history.push('/reviews')
   };
 
@@ -34,7 +38,7 @@ function CreateReviewPage() {
   return (
     <>
       <h1>Add Review</h1>
-      <form className='review-form' onSubmit={handleSubmit}>
+      <form className='review-form' onSubmit={handleAddReview}>
         <ul>
           {errors.map((error, id) => (
             <li key={id}>{error}</li>
@@ -52,7 +56,7 @@ function CreateReviewPage() {
         </label>
         <label>
           Rating
-          <select value={rating} onChange={updateRating} required>
+          <select value={rating} onChange={updateRating}>
            <option value="1">1</option>
            <option value="2">2</option>
            <option value="3">3</option>

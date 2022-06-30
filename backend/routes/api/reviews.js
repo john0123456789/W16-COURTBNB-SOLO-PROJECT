@@ -29,8 +29,9 @@ router.get('/', asyncHandler(async (req, res, next) => {
 
 // creating a review
 router.post('/create', asyncHandler(async (req,res) => {
-    const {courtId, review, rating} = req.body
+    const {userId, courtId, review, rating} = req.body
     const addReview = await db.Review.create({
+       userId,
        courtId,
        review,
        rating,
@@ -39,13 +40,13 @@ router.post('/create', asyncHandler(async (req,res) => {
 }));
 
 // editing a review
-router.put('/:id(\\d+)', asyncHandler(async function (req, res) {
-    const editReview = await db.Review.findByPk(req.body.id);
-    const {courtId, review, rating} = req.body
-    const editedReview = await editReview.update(req.body)
-    return res.json(editedReview)
-})
-);
+// router.put('/:id(\\d+)', asyncHandler(async function (req, res) {
+//     const editReview = await db.Review.findByPk(req.body.id);
+//     const {courtId, review, rating} = req.body
+//     const editedReview = await editReview.update(req.body)
+//     return res.json(editedReview)
+// })
+// );
 
 // deleting a review
 router.delete('/:id(\\d+)', asyncHandler(async(req, res) => {
