@@ -30,9 +30,10 @@ function CourtsPage() {
               }
               const handleAddReviewClick = (e) => {
                 e.preventDefault();
-                history.push(`/reviews/create`)
+                const courtId = Number(e.target.id)
+                history.push(`/reviews/create/${courtId}`)
               }
-              
+
             return <ul key={court.id}>
                 <li>{court.name}</li>
                 <li>Description: {court.description}</li>

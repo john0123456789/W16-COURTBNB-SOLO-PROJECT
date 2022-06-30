@@ -76,7 +76,6 @@ function UpdateCourtPage() {
             placeholder='Name'
             value={name}
             onChange={updateName}
-            required
           />
         </label>
         <label>
@@ -86,7 +85,6 @@ function UpdateCourtPage() {
             placeholder="Address"
             value={address}
             onChange={updateAddress}
-            required
           />
         </label>
         <label>
@@ -96,7 +94,6 @@ function UpdateCourtPage() {
             placeholder="City"
             value={city}
             onChange={updateCity}
-            required
           />
         </label>
         <label>
@@ -106,7 +103,6 @@ function UpdateCourtPage() {
             placeholder="State"
             value={state}
             onChange={updateState}
-            required
           />
         </label>
         <label>
@@ -116,7 +112,6 @@ function UpdateCourtPage() {
             placeholder="Country"
             value={country}
             onChange={updateCountry}
-            required
           />
         </label>
         <label>
@@ -126,7 +121,6 @@ function UpdateCourtPage() {
             placeholder="Description"
             value={description}
             onChange={updateDescription}
-            required
           />
         </label>
         <label>
@@ -136,7 +130,6 @@ function UpdateCourtPage() {
             placeholder="$/hour"
             value={price}
             onChange={updatePrice}
-            required
           />
         </label>
         <button type="submit">Submit</button>

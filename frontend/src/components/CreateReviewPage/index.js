@@ -9,12 +9,6 @@ function CreateReviewPage() {
   const user = useSelector(state => state.session.user);
   const [userId] = useState(user.id);
 
-  const court = useSelector(state => state.courts);
-  console.log(court)
-  const courtArr = Object.values(court);
-  console.log(courtArr)
-  const courtId = null;
-
   const [review, setReview] = useState('');
   const [rating, setRating] = useState(1);
   const [errors, setErrors] = useState([]);
@@ -24,9 +18,13 @@ function CreateReviewPage() {
 
 
   const handleAddReview = async (e) => {
+    const url = window.location.href.split('/')
+    console.log(url)
+    const num = Number(url[url.length -1])
+
     const reviewForm = {
       userId,
-      courtId,
+      courtId: num,
       review,
       rating,
     };
@@ -56,7 +54,6 @@ function CreateReviewPage() {
             placeholder="Review"
             value={review}
             onChange={updateReview}
-            required
           />
         </label>
         <label>

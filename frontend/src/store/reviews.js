@@ -1,3 +1,4 @@
+
 import { csrfFetch } from "./csrf"
 
 // CREATE
@@ -49,8 +50,9 @@ const actionDeleteReview = (review) => {
 
 // action creators/thunks
 // create new review
-export const thunkCreateReview = (review) => async dispatch => {
-    const response = await csrfFetch('/api/reviews/create', {
+export const thunkCreateReview = (review, id) => async dispatch => {
+  console.log(review)
+    const response = await csrfFetch(`/api/reviews/create/${id}`, {
       method: 'POST',
       headers: { 'Content-Type' : 'application/json' },
       body: JSON.stringify(review)
@@ -72,16 +74,6 @@ export const thunkGetReviews = (id) => async (dispatch) => {
       dispatch(actionGetReviews(data))
     }
 }
-
-// get a court
-// export const thunkSingleReview = (id) => async (dispatch) => {
-//   const response = await csrfFetch(`/api/reviews/${id}`)
-
-//   if (response.ok) {
-//     const data = await response.json();
-//     dispatch(actionSingleReview(data))
-//   }
-// }
 
 // update a court
 // export const thunkUpdateReview = (review, id) => async (dispatch) => {
@@ -116,10 +108,11 @@ export const reviewReducer = (state = initialState, action) => {
     let newState = {...state};
     switch(action.type) {
       case GET_REVIEWS:
+        const emptyNewState = {};
         action.reviews.forEach((review) => {
-        return newState[review.id] = review;
+        return emptyNewState[review.id] = review;
         });
-        return newState;
+        return emptyNewState;
       case CREATE_REVIEW:
          return {...state, [action.review.id]: action.review };
       // case UPDATE_REVIEW:

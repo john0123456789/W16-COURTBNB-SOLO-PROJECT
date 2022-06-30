@@ -8,6 +8,7 @@ function CreateCourtPage() {
   const history = useHistory();
   const user = useSelector(state => state.session.user)
   const [name, setName] = useState('');
+  const [url, setUrl] = useState('');
   const [description, setDescription] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
@@ -17,7 +18,7 @@ function CreateCourtPage() {
   const [userId] = useState(user.id);
   const [errors, setErrors] = useState([]);
 
-
+  const updateUrl = (e) => setUrl(e.target.value);
   const updateAddress = (e) => setAddress(e.target.value);
   const updateCity = (e) => setCity(e.target.value);
   const updateState = (e) => setState(e.target.value);
@@ -29,6 +30,7 @@ function CreateCourtPage() {
   const handleSubmit = async (e) => {
     const court = {
       userId,
+      url,
       description,
       address,
       city,
@@ -63,7 +65,6 @@ function CreateCourtPage() {
             placeholder='Name'
             value={name}
             onChange={updateName}
-            required
           />
         </label>
         <label>
@@ -73,7 +74,6 @@ function CreateCourtPage() {
             placeholder="Address"
             value={address}
             onChange={updateAddress}
-            required
           />
         </label>
         <label>
@@ -83,7 +83,6 @@ function CreateCourtPage() {
             placeholder="City"
             value={city}
             onChange={updateCity}
-            required
           />
         </label>
         <label>
@@ -93,7 +92,6 @@ function CreateCourtPage() {
             placeholder="State"
             value={state}
             onChange={updateState}
-            required
           />
         </label>
         <label>
@@ -103,7 +101,6 @@ function CreateCourtPage() {
             placeholder="Country"
             value={country}
             onChange={updateCountry}
-            required
           />
         </label>
         <label>
@@ -113,7 +110,15 @@ function CreateCourtPage() {
             placeholder="Description"
             value={description}
             onChange={updateDescription}
-            required
+          />
+        </label>
+        <label>
+          Image Url
+          <input
+            type="text"
+            placeholder='Image Url'
+            value={url}
+            onChange={updateUrl}
           />
         </label>
         <label>
@@ -123,7 +128,6 @@ function CreateCourtPage() {
             placeholder="$/hour"
             value={price}
             onChange={updatePrice}
-            required
           />
         </label>
         <button type="submit">Submit</button>

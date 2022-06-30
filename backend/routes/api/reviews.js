@@ -3,17 +3,6 @@ const router = express.Router();
 const db = require('../../db/models')
 const asyncHandler = require('express-async-handler');
 const { response } = require('express');
-// const { requireAuth } = require('../auth.js')
-// const { check, validationResult } = require('express-validator');
-
-// const reviewValidators = [
-//     check('review')
-//         .exists({ checkFalsy: true })
-//         .withMessage('Please fill out review.'),
-//     check('rating')
-//         .exists({ checkFalsy: true })
-//         .withMessage('Please select a rating.'),
-// ];
 
 // getting reviews
 router.get('/court/:id', asyncHandler(async (req, res) => {
@@ -25,14 +14,9 @@ router.get('/court/:id', asyncHandler(async (req, res) => {
     return res.json(reviews);
 }));
 
-// getting a review
-// router.get('/:id(\\d+)', asyncHandler(async (req, res) => {
-//     const review = await db.Review.findByPk(req.params.id);
-//     return res.json(review)
-// }));
 
 // creating a review
-router.post('/create', asyncHandler(async (req,res) => {
+router.post('/create/:id', asyncHandler(async (req,res) => {
     const {userId, courtId, review, rating} = req.body
     const addReview = await db.Review.create({
        userId,
