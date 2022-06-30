@@ -1,4 +1,4 @@
-import { thunkGetReviews } from '../../store/reviews';
+import { thunkGetReviews, thunkDeleteReview } from '../../store/reviews';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
@@ -8,25 +8,33 @@ function ReviewsPage() {
     const history = useHistory();
 
     const sessionUser = useSelector(state => state.session.user);
-    const reviewsObj = useSelector(state => state.reviews);
-    const reviewsArr = Object.values(reviewsObj);
+    const reviews = useSelector(state => state.reviews);
+    const reviewsArr = Object.values(reviews);
+    const url = window.location.href.split("/")
+    const num = Number(url[url.length - 1])
 
     useEffect (() => {
-        dispatch(thunkGetReviews())
+        dispatch(thunkGetReviews(num))
     }, [dispatch])
 
   if (sessionUser) {
     return (
         <>
-        {reviewsObj && reviewsArr.map(review => {
-            const handlePostClick = (e) => {
+        {reviews && reviewsArr.map(review => {
+            const handleDeleteClick = (e) => {
                 e.preventDefault();
-                history.push(`/reviews/create`)
+                const reviewId = Number(e.target.id)
+                for (review of reviewsArr) {
+                  if(review.id === reviewId) {
+                    dispatch(thunkDeleteReview(review, reviewId))
+                    history.push(`/reviews/court/${review.courtId}`)
+                  }
+                }
               }
             return <ul key={review.id}>
-                <li>{review.review}</li>
-                <li>{review.rating}</li>
-                <button type='button' onClick={handlePostClick}>Add Review</button>
+                <li>Review: {review.review}</li>
+                <li>Rating: {review.rating}</li>
+                <button type='button' id={review.id} onClick={handleDeleteClick}>Remove</button>
             </ul>
           })}
         </>
@@ -34,10 +42,10 @@ function ReviewsPage() {
 } else {
     return (
         <>
-        {reviewsObj && reviewsArr.map(review => {
+        {reviews && reviewsArr.map(review => {
             return <ul key={review.id}>
-                <li>{review.review}</li>
-                <li>{review.rating}</li>
+                <li>Review:{review.review}</li>
+                <li>Rating:{review.rating}</li>
             </ul>
           })}
         </>

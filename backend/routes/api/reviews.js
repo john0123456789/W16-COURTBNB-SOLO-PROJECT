@@ -15,9 +15,13 @@ const { response } = require('express');
 //         .withMessage('Please select a rating.'),
 // ];
 
-// getting all reviews
-router.get('/', asyncHandler(async (req, res, next) => {
-    const reviews = await db.Review.findAll();
+// getting reviews
+router.get('/court/:id', asyncHandler(async (req, res) => {
+    const reviews = await db.Review.findAll({
+        where: {
+            courtId: req.params.id
+        }
+    });
     return res.json(reviews);
 }));
 
