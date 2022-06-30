@@ -36,7 +36,6 @@ function LoginFormPage() {
           type="text"
           value={credential}
           onChange={(e) => setCredential(e.target.value)}
-          required
         />
       </label>
       <label>
@@ -45,7 +44,6 @@ function LoginFormPage() {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          required
         />
       </label>
       <button type="submit">Log In</button>

@@ -36,7 +36,7 @@ function App() {
           <Route path="/courts">
             <CourtsPage />
           </Route>
-          <Route exact path="/reviews/create">
+          <Route exact path="/reviews/create/:id">
             <CreateReviewPage />
           </Route>
           <Route path="/reviews/court/:id">

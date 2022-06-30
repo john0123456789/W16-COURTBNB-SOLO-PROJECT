@@ -2,6 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Court = sequelize.define('Court', {
     userId: DataTypes.INTEGER,
+    url: DataTypes.STRING,
     description: DataTypes.STRING,
     address: DataTypes.STRING,
     city: DataTypes.STRING,
@@ -13,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
   Court.associate = function(models) {
     Court.hasMany(models.Review, { foreignKey: 'courtId' })
     Court.belongsTo(models.User, { foreignKey: 'userId' })
-    Court.hasOne(models.Image, { foreignKey: 'courtId' })
   };
   return Court;
 };
