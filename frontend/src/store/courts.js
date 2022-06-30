@@ -50,7 +50,6 @@ const actionDeleteCourt = (court) => {
 // action creators/thunks
 // create new court
 export const thunkCreateCourt = (court) => async dispatch => {
-
     const response = await csrfFetch(`/api/courts/create`, {
       method: 'POST',
       headers: { 'Content-Type' : 'application/json' },

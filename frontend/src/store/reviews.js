@@ -50,8 +50,7 @@ const actionDeleteReview = (review) => {
 // action creators/thunks
 // create new review
 export const thunkCreateReview = (review) => async dispatch => {
-
-    const response = await csrfFetch(`/api/reviews/create`, {
+    const response = await csrfFetch('/api/reviews/create', {
       method: 'POST',
       headers: { 'Content-Type' : 'application/json' },
       body: JSON.stringify(review)
@@ -122,10 +121,7 @@ export const reviewReducer = (state = initialState, action) => {
         });
         return newState;
       case CREATE_REVIEW:
-        if (!state[action.review.id]) {
-            newState = {...state, [action.review.id]: action.review }
-        };
-        return newState
+         return {...state, [action.review.id]: action.review };
       case UPDATE_REVIEW:
           newState = {...state, [action.review.id]: action.review };
           return newState;
