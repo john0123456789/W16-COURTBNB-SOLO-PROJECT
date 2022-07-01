@@ -46,7 +46,7 @@ function Navigation({ isLoaded }){
   return (
     <>
     <ul>
-      <img className='logo' src="https://i.imgur.com/2tjwA1G.png" onClick={handleHomeClick}/>
+      <img alt="homeButton" className='logo' src="https://i.imgur.com/2tjwA1G.png" onClick={handleHomeClick}/>
         {isLoaded && sessionLinks}
     </ul>
     </>

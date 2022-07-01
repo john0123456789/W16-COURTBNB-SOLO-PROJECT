@@ -37,7 +37,7 @@ function CourtsPage() {
 
             return <ul className="courts" key={court.id}>
               <div className="courts-page">
-                <ul><img src={court.url} className='court-img'/></ul>
+                <ul><img alt="courtImages" src={court.url} className='court-img'/></ul>
                 <ul className="courtName">{court.name}</ul>
                 <ul className="courtDescription">Description: {court.description}</ul>
                 <ul>Country: {court.country}</ul>
@@ -54,12 +54,14 @@ function CourtsPage() {
     return (
         <>
         {courtsObj && courtsArr.map(court => {
-            return <ul key={court.id}>
-                <ul> <a href={court.url}><img src={court.url} className='court-img'/></a></ul>
-                <li>{court.name}</li>
-                <li>Description: {court.description}</li>
-                <li>Country: {court.country}</li>
-                <li>Rate: ${court.price}.00/hour</li>
+            return <ul className="courts" key={court.id}>
+            <div className="courts-page">
+              <ul><img alt="courtImages" src={court.url} className='court-img'/></ul>
+              <ul className="courtName">{court.name}</ul>
+              <ul className="courtDescription">Description: {court.description}</ul>
+              <ul>Country: {court.country}</ul>
+              <ul>Rate: ${court.price}.00/hour</ul>
+            </div>
             </ul>
           })}
         </>

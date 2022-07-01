@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkCreateReview } from '../../store/reviews';
 import { useHistory } from 'react-router-dom'
+import './CreateReviewPage.css';
 
 function CreateReviewPage() {
   const dispatch = useDispatch();
@@ -11,7 +12,6 @@ function CreateReviewPage() {
 
   const [review, setReview] = useState('');
   const [rating, setRating] = useState(1);
-  const [errors, setErrors] = useState([]);
 
   const updateReview = (e) => setReview(e.target.value);
   const updateRating = (e) => setRating(parseInt(e.target.value, 10));
@@ -40,16 +40,13 @@ function CreateReviewPage() {
 
   return (
     <>
+    <body className="reviewBody">
       <h1>Add Review</h1>
       <form className='review-form' onSubmit={handleAddReview}>
-        <ul>
-          {errors.map((error, id) => (
-            <li key={id}>{error}</li>
-          ))}
-        </ul>
         <label>
           Review
           <textarea
+            className="reviewBox"
             type="text"
             placeholder="Review"
             value={review}
@@ -58,7 +55,7 @@ function CreateReviewPage() {
         </label>
         <label>
           Rating
-          <select value={rating} onChange={updateRating}>
+          <select className="rating-select" value={rating} onChange={updateRating}>
            <option value="1">1</option>
            <option value="2">2</option>
            <option value="3">3</option>
@@ -66,9 +63,12 @@ function CreateReviewPage() {
            <option value="5">5</option>
           </select>
         </label>
-        <button type="submit">Submit</button>
-        <button type="button" onClick={handleCancelClick}>Cancel</button>
+        <div className="reviewButtons">
+          <button type="submit">Submit</button>
+          <button type="button" onClick={handleCancelClick}>Cancel</button>
+        </div>
       </form>
+    </body>
     </>
   );
 }
