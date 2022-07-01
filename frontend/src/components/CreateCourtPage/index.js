@@ -17,7 +17,6 @@ function CreateCourtPage() {
   const [country, setCountry] = useState('');
   const [price, setPrice] = useState('');
   const [userId] = useState(user.id);
-  const [errors, setErrors] = useState([]);
 
   const updateUrl = (e) => setUrl(e.target.value);
   const updateAddress = (e) => setAddress(e.target.value);

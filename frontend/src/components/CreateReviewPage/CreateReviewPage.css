@@ -1,8 +1,8 @@
-.courtBody {
+.reviewBody {
     text-align:center;
 }
 
-.court-form {
+.review-form {
     display: inline-block;
     width: 200px;
     font-size: 18px;
@@ -11,16 +11,15 @@
     padding-bottom: 10px;
 }
 
-.addCourtTitle {
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    text-align: center;
+.reviewButtons {
+    padding-top: 10px;
 }
 
-.description {
+.reviewBox {
     resize: none;
     height: 150px;
 }
 
-.createbuttons {
-    padding-top: 10px;
+.rating-select > option {
+    background: grey;
 }

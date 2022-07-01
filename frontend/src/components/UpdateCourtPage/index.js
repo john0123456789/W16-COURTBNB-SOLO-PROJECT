@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkUpdateCourt, thunkDeleteCourt } from '../../store/courts';
 import { useHistory, useParams } from 'react-router-dom'
+import "./UpdateCourtPage.css"
 
 function UpdateCourtPage() {
   const dispatch = useDispatch();
@@ -17,8 +18,7 @@ function UpdateCourtPage() {
   const [state, setState] = useState(oneCourt.state);
   const [country, setCountry] = useState(oneCourt.country);
   const [price, setPrice] = useState(oneCourt.price);
-  const [userId] = useState(user.id);
-  const [errors, setErrors] = useState([]);
+  const [userId] = useState(user.id);;
 
 
   const updateAddress = (e) => setAddress(e.target.value);
@@ -62,13 +62,9 @@ function UpdateCourtPage() {
 
   return (
     <>
-      <h1>Edit Court</h1>
+    <body className="editBody">
+      <h1 className="editTitle">Edit Court</h1>
       <form className='court-form' onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, id) => (
-            <li key={id}>{error}</li>
-          ))}
-        </ul>
         <label>
           Name
           <input
@@ -117,6 +113,7 @@ function UpdateCourtPage() {
         <label>
           Description
           <textarea
+            className="description"
             type="text"
             placeholder="Description"
             value={description}
@@ -132,10 +129,13 @@ function UpdateCourtPage() {
             onChange={updatePrice}
           />
         </label>
-        <button type="submit">Submit</button>
-        <button type="button" onClick={handleCancelClick}>Cancel</button>
-        <button type="button" onClick={handleDeleteClick}>Delete</button>
+        <div className="editButtons">
+          <button type="submit">Submit</button>
+          <button type="button" onClick={handleCancelClick}>Cancel</button>
+          <button type="button" onClick={handleDeleteClick}>Delete</button>
+        </div>
       </form>
+    </body>
     </>
   );
 }
