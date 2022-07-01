@@ -52,6 +52,7 @@ function CourtsPage() {
         <>
         {courtsObj && courtsArr.map(court => {
             return <ul key={court.id}>
+                <ul> <a href={court.url}><img src={court.url} className='court-img'/></a></ul>
                 <li>{court.name}</li>
                 <li>Description: {court.description}</li>
                 <li>Country: {court.country}</li>
