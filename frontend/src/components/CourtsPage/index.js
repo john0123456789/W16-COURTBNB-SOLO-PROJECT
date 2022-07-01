@@ -2,6 +2,7 @@ import { thunkGetCourts } from '../../store/courts';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
+import './CourtsPage.css';
 
 function CourtsPage() {
     const dispatch = useDispatch();
@@ -34,15 +35,17 @@ function CourtsPage() {
                 history.push(`/reviews/create/${courtId}`)
               }
 
-            return <ul key={court.id}>
-                <ul> <a href={court.url}><img src={court.url} className='court-img'/></a></ul>
-                <li>{court.name}</li>
-                <li>Description: {court.description}</li>
-                <li>Country: {court.country}</li>
-                <li>Rate: ${court.price}.00/hour</li>
+            return <ul className="courts" key={court.id}>
+              <div className="courts-page">
+                <ul><img src={court.url} className='court-img'/></ul>
+                <ul className="courtName">{court.name}</ul>
+                <ul className="courtDescription">Description: {court.description}</ul>
+                <ul>Country: {court.country}</ul>
+                <ul>Rate: ${court.price}.00/hour</ul>
                 <button type='button' onClick={handleEditClick}>Edit</button>
                 <button type='button' id={court.id} onClick={handleReviewClick}>Reviews</button>
                 <button type='button' id={court.id} onClick={handleAddReviewClick}>Add Review</button>
+              </div>
             </ul>
           })}
         </>

@@ -35,22 +35,19 @@ function Navigation({ isLoaded }){
     );
   } else {
     sessionLinks = (
-      <>
+      <div className="navOut">
       <button type='button' onClick={handleLoginClick}>Log In</button>
       <button type='button' onClick={handleSignupClick}>Sign Up</button>
       <button type='button' onClick={handleCourtsClick}>Courts</button>
-      </>
+      </div>
     );
   }
 
   return (
     <>
-    <h1>Courtbnb</h1>
     <ul>
-      <li>
-        <button type='button' onClick={handleHomeClick}>Home</button>
+      <img className='logo' src="https://i.imgur.com/2tjwA1G.png" onClick={handleHomeClick}/>
         {isLoaded && sessionLinks}
-      </li>
     </ul>
     </>
   );
