@@ -1,0 +1,27 @@
+.logo {
+  width: 150px;
+  cursor: pointer;
+}
+
+.navRight {
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  float:right;
+  width:auto;
+  text-align:left;
+  padding-right:50px;
+  margin-top:12px
+}
+
+.navOut {
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  float:right;
+  width:auto;
+  text-align:left;
+  padding-right:50px;
+  margin-top:12px
+}
+
+.profile-dropdown {
+  margin-right: 5px;
+  padding-left: 190px;
+}

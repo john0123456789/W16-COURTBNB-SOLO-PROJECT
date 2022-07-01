@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { thunkCreateCourt } from '../../store/courts';
 import { useHistory } from 'react-router-dom'
+import './CreateCourtPage.css';
 
 function CreateCourtPage() {
   const dispatch = useDispatch();
@@ -51,13 +52,9 @@ function CreateCourtPage() {
 
   return (
     <>
-      <h1>Add Court</h1>
+      <h1 className="addCourtTitle">Add Court</h1>
+    <body className="courtBody">
       <form className='court-form' onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, id) => (
-            <li key={id}>{error}</li>
-          ))}
-        </ul>
         <label>
           Name
           <input
@@ -106,6 +103,7 @@ function CreateCourtPage() {
         <label>
           Description
           <textarea
+            className="description"
             type="text"
             placeholder="Description"
             value={description}
@@ -130,9 +128,12 @@ function CreateCourtPage() {
             onChange={updatePrice}
           />
         </label>
-        <button type="submit">Submit</button>
-        <button type="button" onClick={handleCancelClick}>Cancel</button>
+      <div className="createbuttons">
+        <button  type="submit">Submit</button>
+        <button  type="button" onClick={handleCancelClick}>Cancel</button>
+      </div>
       </form>
+    </body>
     </>
   );
 }

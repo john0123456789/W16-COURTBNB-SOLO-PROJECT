@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
-import { NavLink, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import './Navigation.css';
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ function ProfileButton({ user }) {
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
+    history.push('/')
   };
 
   const handleCourtsClick = (e) => {
@@ -41,22 +43,22 @@ function ProfileButton({ user }) {
   }
 
   return (
-    <>
-      <button onClick={openMenu}>
-        <i className="fa-regular fa-user"></i>
-      </button>
+    <div className="navRight">
       <button type= 'button' onClick={handleCourtsClick}>Courts</button>
       <button type='button' onClick={handleAddClick}>Add Court</button>
+      <button className='profile-icon' onClick={openMenu}>
+        <i className="fa-regular fa-user"></i>
+      </button>
       {showMenu && (
         <ul className="profile-dropdown">
-          <li>{user.username}</li>
-          <li>{user.email}</li>
-          <li>
+          <ul>{user.username}</ul>
+          <ul>{user.email}</ul>
+          <ul>
             <button onClick={logout}>Log Out</button>
-          </li>
+          </ul>
         </ul>
       )}
-    </>
+    </div>
   );
 }
 
