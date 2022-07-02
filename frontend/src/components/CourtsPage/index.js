@@ -1,4 +1,5 @@
 import { thunkGetCourts } from '../../store/courts';
+import { actionClearReview } from '../../store/reviews';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
@@ -18,7 +19,7 @@ function CourtsPage() {
 
   if (sessionUser) {
     return (
-        <>
+        <body>
         {courtsObj && courtsArr.map(court => {
             const handleEditClick = (e) => {
                 e.preventDefault();
@@ -26,6 +27,7 @@ function CourtsPage() {
               }
               const handleReviewClick = (e) => {
                 e.preventDefault();
+                dispatch(actionClearReview());
                 const courtId = Number(e.target.id)
                 history.push(`/reviews/court/${courtId}`)
               }
@@ -34,26 +36,30 @@ function CourtsPage() {
                 const courtId = Number(e.target.id)
                 history.push(`/reviews/create/${courtId}`)
               }
-
-            return <ul className="courts" key={court.id}>
-              <div className="courts-page">
-                <ul><img alt="courtImages" src={court.url} className='court-img'/></ul>
-                <ul className="courtName">{court.name}</ul>
-                <ul className="courtDescription">Description: {court.description}</ul>
-                <ul>Country: {court.country}</ul>
-                <ul>Rate: ${court.price}.00/hour</ul>
-                <button type='button' onClick={handleEditClick}>Edit</button>
-                <button type='button' id={court.id} onClick={handleReviewClick}>Reviews</button>
-                <button type='button' id={court.id} onClick={handleAddReviewClick}>Add Review</button>
-              </div>
-            </ul>
-          })}
-        </>
-    );
-} else {
+              return <ul className="courts" key={court.id}>
+                <div className="courts-page">
+                  <ul><img alt="courtImages" src={court.url} className='court-img'/></ul>
+                  <ul className="courtName">{court.name}</ul>
+                  <ul className="courtDescription">Description: {court.description}</ul>
+                  <ul>Country: {court.country}</ul>
+                  <ul>Rate: ${court.price}.00/hour</ul>
+                  <button type='button' onClick={handleEditClick}>Edit</button>
+                  <button type='button' id={court.id} onClick={handleReviewClick}>Reviews</button>
+                  <button type='button' id={court.id} onClick={handleAddReviewClick}>Add Review</button>
+                </div>
+              </ul>
+            })}
+          </body>
+      );
+  } else {
     return (
-        <>
+        <body>
         {courtsObj && courtsArr.map(court => {
+            const handleReviewClick = (e) => {
+              e.preventDefault();
+              const courtId = Number(e.target.id)
+              history.push(`/reviews/court/${courtId}`)
+            }
             return <ul className="courts" key={court.id}>
             <div className="courts-page">
               <ul><img alt="courtImages" src={court.url} className='court-img'/></ul>
@@ -61,10 +67,11 @@ function CourtsPage() {
               <ul className="courtDescription">Description: {court.description}</ul>
               <ul>Country: {court.country}</ul>
               <ul>Rate: ${court.price}.00/hour</ul>
+              <button type='button' id={court.id} onClick={handleReviewClick}>Reviews</button>
             </div>
             </ul>
           })}
-        </>
+        </body>
     );
   }
 }

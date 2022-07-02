@@ -16,22 +16,36 @@ function CreateReviewPage() {
   const updateReview = (e) => setReview(e.target.value);
   const updateRating = (e) => setRating(parseInt(e.target.value, 10));
 
+  let checkErrors = { review:'', };
+  const [errors, setErrors] = useState(checkErrors);
+
 
   const handleAddReview = async (e) => {
+    e.preventDefault();
     const url = window.location.href.split('/')
-    console.log(url)
     const num = Number(url[url.length -1])
 
+    let error = false;
+    checkErrors = { ...checkErrors }
+
+    if (review.length < 5) {
+      checkErrors.review = "Review must be at least 5 characters long."
+      error = true;
+    }
+
+    setErrors(checkErrors);
+
+    if (!error) {
     const reviewForm = {
       userId,
       courtId: num,
       review,
       rating,
     };
-    e.preventDefault();
     dispatch(thunkCreateReview(reviewForm));
     history.push('/courts')
   };
+}
 
   const handleCancelClick = (e) => {
     e.preventDefault();
@@ -42,6 +56,9 @@ function CreateReviewPage() {
     <>
     <body className="reviewBody">
       <h1>Add Review</h1>
+      <div className="errorsList">
+        <ul>{errors.review && <div>{errors.review}</div>}</ul>
+      </div>
       <form className='review-form' onSubmit={handleAddReview}>
         <label>
           Review

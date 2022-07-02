@@ -2,6 +2,7 @@ import { thunkGetReviews, thunkDeleteReview } from '../../store/reviews';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
+import "./ReviewsPage.css"
 
 function ReviewsPage() {
     const dispatch = useDispatch();
@@ -15,7 +16,8 @@ function ReviewsPage() {
 
     useEffect (() => {
         dispatch(thunkGetReviews(num))
-    }, [dispatch])
+    }, [dispatch, num])
+
 
   if (sessionUser) {
     return (
@@ -32,9 +34,11 @@ function ReviewsPage() {
                 }
               }
             return <ul key={review.id}>
-                <li>Review: {review.review}</li>
-                <li>Rating: {review.rating}</li>
-                <button type='button' id={review.id} onClick={handleDeleteClick}>Remove</button>
+              <div className="reviewItems">
+                <ul>Review: {review.review}</ul>
+                <ul>Rating: {review.rating}</ul>
+                <button className="remove-review-btn" type='button' id={review.id} onClick={handleDeleteClick}>Remove</button>
+              </div>
             </ul>
           })}
         </>
@@ -44,8 +48,10 @@ function ReviewsPage() {
         <>
         {reviews && reviewsArr.map(review => {
             return <ul key={review.id}>
-                <li>Review:{review.review}</li>
-                <li>Rating:{review.rating}</li>
+              <div className="reviewItems">
+                <ul>Review:{review.review}</ul>
+                <ul>Rating:{review.rating}</ul>
+              </div>
             </ul>
           })}
         </>

@@ -10,9 +10,18 @@ const GET_REVIEWS = 'reviews/GET_REVIEWS'
 // const UPDATE_REVIEW = 'reviews/UPDATE_REVIEW'
 // DELETE
 const DELETE_REVIEW = 'reviews/DELETE_REVIEW'
+// CLEAR
+const CLEAR_REVIEW = 'reviews/CLEAR_REVIEW'
+
 
 
 // actions
+export const actionClearReview = () => {
+  return {
+      type: CLEAR_REVIEW,
+  }
+}
+
 const actionCreateReview = (review) => {
     return {
         type: CREATE_REVIEW,
@@ -121,6 +130,8 @@ export const reviewReducer = (state = initialState, action) => {
       case DELETE_REVIEW:
         delete newState[action.review.id];
         return newState;
+      case CLEAR_REVIEW:
+        return {};
       default:
         return state;
     }

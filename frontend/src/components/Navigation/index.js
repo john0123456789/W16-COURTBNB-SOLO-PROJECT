@@ -25,7 +25,7 @@ function Navigation({ isLoaded }){
 
   const handleHomeClick = (e) => {
     e.preventDefault();
-    history.push('/')
+    history.push('/');
   }
 
   let sessionLinks;
@@ -46,7 +46,7 @@ function Navigation({ isLoaded }){
   return (
     <>
     <ul>
-      <img alt="homeButton" className='logo' src="https://i.imgur.com/2tjwA1G.png" onClick={handleHomeClick}/>
+      <img alt="homeButton" className='logo' src="https://i.imgur.com/aSeMP0u.png" onClick={handleHomeClick}/>
         {isLoaded && sessionLinks}
     </ul>
     </>
