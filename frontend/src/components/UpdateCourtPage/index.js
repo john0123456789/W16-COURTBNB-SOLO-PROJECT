@@ -12,6 +12,7 @@ function UpdateCourtPage() {
   const court = useSelector(state => state.courts)
   const oneCourt = court[id]
   const [name, setName] = useState(oneCourt.name);
+  const [url, setUrl] = useState(oneCourt.url);
   const [description, setDescription] = useState(oneCourt.description);
   const [address, setAddress] = useState(oneCourt.address);
   const [city, setCity] = useState(oneCourt.city);
@@ -20,6 +21,8 @@ function UpdateCourtPage() {
   const [price, setPrice] = useState(oneCourt.price);
   const [userId] = useState(user.id);;
 
+  let checkErrors = { name:'', url:'', description:'', address:'', city:'', state:'', country:'', price:'' };
+  const [errors, setErrors] = useState(checkErrors);
 
   const updateAddress = (e) => setAddress(e.target.value);
   const updateCity = (e) => setCity(e.target.value);
@@ -28,11 +31,65 @@ function UpdateCourtPage() {
   const updateName = (e) => setName(e.target.value);
   const updateDescription = (e) => setDescription(e.target.value);
   const updatePrice = (e) => setPrice(e.target.value);
+  const updateUrl = (e) => setUrl(e.target.value);
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let error = false;
+    checkErrors = { ...checkErrors }
 
+    if (name.length < 5) {
+      checkErrors.name = "Court name must be at least 5 characters long."
+      error = true;
+    }
+    else if (name === '') {
+      checkErrors.name = "Court name cannot be empty."
+      error = true;
+    }
+    if (!url.includes(".jpg") && !url.includes(".png") && !url.includes(".JPG") && !url.includes(".PNG") && !url.includes("image")) {
+      checkErrors.url = "Url must be a jpg/png or contain image."
+      error = true;
+    }
+    else if (url.length < 4) {
+      checkErrors.url = "Url must be at least 4 characters."
+      error = true;
+    }
+    if (description === '') {
+      checkErrors.description = "Description cannot be empty."
+      error = true;
+    }
+    else if (description.length < 25) {
+      checkErrors.description = "Description must be at least 25 characters long."
+      error = true;
+    }
+    else if (description.length > 100) {
+      checkErrors.description = "We just want a description not your life story, keep it under 100 characters."
+      error = true;
+    }
+    if (isNaN(price)) {
+      checkErrors.price = "Please input only numbers."
+      error = true;
+    }
+    else if (price === "") {
+      checkErrors.price = "Price cannot be empty."
+      error = true;
+    }
+    if (address.length < 4 || address.length > 40) {
+      checkErrors.address = "Address must be between 4 and 40 characters."
+      error = true;
+    }
+    if (city.length < 4 || city.length > 40) {
+      checkErrors.city = "City must be between 4 and 40 characters."
+      error = true;
+    }
+    if (state.length > 30) {
+      checkErrors.state = "State must be under 30 characters."
+      error = true;
+    }
+    setErrors(checkErrors);
+
+    if (!error) {
     const editedCourt = {
       id,
       userId,
@@ -44,10 +101,10 @@ function UpdateCourtPage() {
       name,
       price,
     };
-    e.preventDefault();
     dispatch(thunkUpdateCourt(editedCourt, id));
     history.push('/courts')
   };
+}
 
   const handleDeleteClick = (e) => {
     e.preventDefault();
@@ -64,6 +121,15 @@ function UpdateCourtPage() {
     <>
     <body className="editBody">
       <h1 className="editTitle">Edit Court</h1>
+    <div className="errorsList">
+        <ul>{errors.name && <div>{errors.name}</div>}</ul>
+        <ul>{errors.url && <div>{errors.url}</div>}</ul>
+        <ul>{errors.description && <div>{errors.description}</div>}</ul>
+        <ul>{errors.price && <div>{errors.price}</div>}</ul>
+        <ul>{errors.address && <div>{errors.address}</div>}</ul>
+        <ul>{errors.city && <div>{errors.city}</div>}</ul>
+        <ul>{errors.state && <div>{errors.state}</div>}</ul>
+      </div>
       <form className='court-form' onSubmit={handleSubmit}>
         <label>
           Name
@@ -119,6 +185,15 @@ function UpdateCourtPage() {
             value={description}
             onChange={updateDescription}
           />
+        <label>
+          Image Url
+          <input
+            type="text"
+            placeholder='Image Url'
+            value={url}
+            onChange={updateUrl}
+          />
+        </label>
         </label>
         <label>
           Price

@@ -1,12 +1,12 @@
 .reviewBody {
-    text-align:center;
+    text-align: center;
 }
 
 .review-form {
     display: inline-block;
     width: 200px;
     font-size: 18px;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     border: 10px solid rgb(106, 206, 208);
     padding-bottom: 10px;
 }
