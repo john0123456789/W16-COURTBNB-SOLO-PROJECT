@@ -43,7 +43,7 @@ function CreateReviewPage() {
       rating,
     };
     dispatch(thunkCreateReview(reviewForm));
-    history.push('/courts')
+    history.push(`/reviews/court/${num}`)
   };
 }
 
@@ -54,7 +54,7 @@ function CreateReviewPage() {
 
   return (
     <>
-    <body className="reviewBody">
+    <div className="reviewBody">
       <h1>Add Review</h1>
       <div className="errorsList">
         <ul>{errors.review && <div>{errors.review}</div>}</ul>
@@ -85,7 +85,7 @@ function CreateReviewPage() {
           <button type="button" onClick={handleCancelClick}>Cancel</button>
         </div>
       </form>
-    </body>
+    </div>
     </>
   );
 }

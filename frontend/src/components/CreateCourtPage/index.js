@@ -110,7 +110,7 @@ function CreateCourtPage() {
   return (
     <>
       <h1 className="addCourtTitle">Add Court</h1>
-    <body className="courtBody">
+    <div className="courtBody">
       <div className="errorsList">
         <ul>{errors.name && <div>{errors.name}</div>}</ul>
         <ul>{errors.url && <div>{errors.url}</div>}</ul>
@@ -199,7 +199,7 @@ function CreateCourtPage() {
         <button  type="button" onClick={handleCancelClick}>Cancel</button>
       </div>
       </form>
-    </body>
+    </div>
     </>
   );
 }

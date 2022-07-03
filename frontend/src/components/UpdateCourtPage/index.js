@@ -119,9 +119,9 @@ function UpdateCourtPage() {
 
   return (
     <>
-    <body className="editBody">
+    <div className="editBody">
       <h1 className="editTitle">Edit Court</h1>
-    <div className="errorsList">
+      <div className="errorsList">
         <ul>{errors.name && <div>{errors.name}</div>}</ul>
         <ul>{errors.url && <div>{errors.url}</div>}</ul>
         <ul>{errors.description && <div>{errors.description}</div>}</ul>
@@ -210,7 +210,7 @@ function UpdateCourtPage() {
           <button type="button" onClick={handleDeleteClick}>Delete</button>
         </div>
       </form>
-    </body>
+    </div>
     </>
   );
 }
