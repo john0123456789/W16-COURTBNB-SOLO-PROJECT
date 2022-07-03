@@ -20,3 +20,7 @@ button:hover {
 body {
   background-color: rgb(212, 222, 212);
 }
+
+input {
+  border-radius: 10px;
+}

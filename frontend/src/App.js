@@ -8,7 +8,7 @@ import CreateCourtPage from "./components/CreateCourtPage";
 import UpdateCourtPage from "./components/UpdateCourtPage";
 import ReviewsPage from "./components/ReviewsPage";
 import CreateReviewPage from "./components/CreateReviewPage";
-// import SingleCourtPage from "./components/SingleCourtPage"
+import HomePage from "./components/HomePage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 
@@ -47,6 +47,9 @@ function App() {
           </Route>
           <Route path="/court/:id">
             <UpdateCourtPage />
+          </Route>
+          <Route path ="/">
+            <HomePage />
           </Route>
         </Switch>
       )}

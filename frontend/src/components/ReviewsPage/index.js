@@ -8,7 +8,7 @@ function ReviewsPage() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const sessionUser = useSelector(state => state.session.user);
+    const user = useSelector(state => state.session.user);
     const reviews = useSelector(state => state.reviews);
     const reviewsArr = Object.values(reviews);
     const url = window.location.href.split("/")
@@ -18,45 +18,44 @@ function ReviewsPage() {
         dispatch(thunkGetReviews(num))
     }, [dispatch, num])
 
-
-  if (sessionUser) {
-    return (
-        <>
-        {reviews && reviewsArr.map(review => {
-            const handleDeleteClick = (e) => {
-                e.preventDefault();
-                const reviewId = Number(e.target.id)
-                for (review of reviewsArr) {
-                  if(review.id === reviewId) {
-                    dispatch(thunkDeleteReview(review, reviewId))
-                    history.push(`/reviews/court/${review.courtId}`)
+    if (reviewsArr.length === 0) {
+      return (
+        <h1>There are currently no reviews for this court.</h1>
+      )
+    } else {
+      return (
+          <>
+          {reviews && reviewsArr.map(review => {
+              const handleDeleteClick = (e) => {
+                  e.preventDefault();
+                  const reviewId = Number(e.target.id)
+                  for (review of reviewsArr) {
+                    if(review.id === reviewId) {
+                      dispatch(thunkDeleteReview(review, reviewId))
+                      history.push(`/reviews/court/${review.courtId}`)
+                    }
                   }
                 }
+
+            if (review.userId === user.id) {
+              return <ul key={review.id}>
+                <div className="reviewItems">
+                  <ul>Review: {review.review}</ul>
+                  <ul>Rating: {review.rating}</ul>
+                  <button className="remove-review-btn" type='button' id={review.id} onClick={handleDeleteClick}>Remove</button>
+                </div>
+              </ul>
+          } else {
+              return <ul key={review.id}>
+                  <div className="reviewItems">
+                  <ul>Review:{review.review}</ul>
+                  <ul>Rating:{review.rating}</ul>
+                </div>
+              </ul>
               }
-            return <ul key={review.id}>
-              <div className="reviewItems">
-                <ul>Review: {review.review}</ul>
-                <ul>Rating: {review.rating}</ul>
-                <button className="remove-review-btn" type='button' id={review.id} onClick={handleDeleteClick}>Remove</button>
-              </div>
-            </ul>
           })}
-        </>
-    );
-} else {
-    return (
-        <>
-        {reviews && reviewsArr.map(review => {
-            return <ul key={review.id}>
-              <div className="reviewItems">
-                <ul>Review:{review.review}</ul>
-                <ul>Rating:{review.rating}</ul>
-              </div>
-            </ul>
-          })}
-        </>
-    );
+      </>
+      );
   }
 }
-
 export default ReviewsPage;
