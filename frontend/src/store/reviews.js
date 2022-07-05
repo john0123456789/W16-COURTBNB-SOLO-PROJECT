@@ -60,7 +60,6 @@ const actionDeleteReview = (review) => {
 // action creators/thunks
 // create new review
 export const thunkCreateReview = (review, id) => async dispatch => {
-  console.log(review)
     const response = await csrfFetch(`/api/reviews/create/${id}`, {
       method: 'POST',
       headers: { 'Content-Type' : 'application/json' },

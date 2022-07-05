@@ -18,6 +18,8 @@ function ReviewsPage() {
     dispatch(thunkGetReviews(num));
   }, [dispatch, num]);
 
+
+
   if (reviewsArr.length === 0) {
     return (
       <h1 className="no-reviews">
@@ -31,7 +33,7 @@ function ReviewsPage() {
           {reviews &&
             reviewsArr.map((review) => {
               return (
-                <ul className="reviewBox" key={review.id}>
+                <ul className="review-container" key={review.id}>
                   <div className="reviewItems">
                     <ul>Review:{review.review}</ul>
                     <ul>Rating:{review.rating}</ul>
@@ -65,7 +67,7 @@ function ReviewsPage() {
                 };
                 if (review.userId === user.id) {
                   return (
-                    <ul className="reviewBox" key={review.id}>
+                    <ul className="review-container" key={review.id}>
                       <div className="reviewItems">
                         <ul>Review: {review.review}</ul>
                         <ul>Rating: {review.rating}</ul>
@@ -82,7 +84,7 @@ function ReviewsPage() {
                   );
                 } else {
                   return (
-                    <ul className="reviewBox" key={review.id}>
+                    <ul className="review-container" key={review.id}>
                       <div className="reviewItems">
                         <ul>Review:{review.review}</ul>
                         <ul>Rating:{review.rating}</ul>
