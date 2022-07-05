@@ -2,4 +2,21 @@
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 20px;
     border-style: double;
+    color: green;
+    border-radius: 10px;
+    width: 500px;
+    text-align: center;
+    padding: 10px;
+}
+
+.no-reviews {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+    color: green;
+}
+
+.reviewBox {
+   height: auto;
+   display: grid;
+   justify-content: center;
 }
