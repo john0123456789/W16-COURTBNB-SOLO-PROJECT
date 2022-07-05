@@ -1,5 +1,6 @@
 .loginBody {
     text-align:center;
+    color: green;
 }
 
 .loginForm {
@@ -7,11 +8,12 @@
     width: 200px;
     font-size: 18px;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    border: 10px solid rgb(106, 206, 208);
+    border: 10px solid green;
     padding-bottom: 10px;
 }
 
 .loginTitle {
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: center;
+    color: green;
 }
