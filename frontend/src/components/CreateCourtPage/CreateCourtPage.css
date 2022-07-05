@@ -21,6 +21,7 @@
 .description {
     resize: none;
     height: 150px;
+    border-radius: 10px;
 }
 
 .createbuttons {

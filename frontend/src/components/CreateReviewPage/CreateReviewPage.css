@@ -18,6 +18,7 @@
 .reviewBox {
     resize: none;
     height: 150px;
+    border-radius: 10px;
 }
 
 .rating-select > option {
